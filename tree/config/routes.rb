@@ -1,10 +1,7 @@
 Tree::Application.routes.draw do
-  resources :statuses
-
-
+  root :to => 'statuses#index'
   devise_for :users
   resources :statuses
-root to: 'statuses#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -1,20 +1,31 @@
-<h2>Sign up</h2>
-
-<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+<div class="row">
+  <div class="span4">
+<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name),html: {class: "well"}) do |f| %>
   <%= f.error_notification %>
 
-  <div class="form-inputs">
-  	<%= f.text_field :first_name , :required => true, :required => true, :required => true,placeholder: 'First Name'%>
-  	<%= f.text_field :last_name, :required => true, :required => true,placeholder: 'Last Name' %>
-  	<%= f.text_field :profile_name , :required => true,placeholder: 'Profile Name'%>
-    <%= f.input :email, :required => true,label: false, :autofocus => true,placeholder:'enter ur email' %>
-    <%= f.input :password, :required => true,label: false,placeholder:'password'%>
-    <%= f.input :password_confirmation,label: false, :required => true,placeholder:'confirm password' %>
-  </div>
-
-  <div class="form-actions">
+  <fieldset>
+      <legend>Sign Up</legend>
+    <%= f.label "First Name" %>
+  	<%= f.text_field :first_name ,:required => true,placeholder: 'First Name'%>
+    
+    <%= f.label "Last Name" %>
+  	<%= f.text_field :last_name,:required => true,placeholder: 'Last Name' %>
+    
+  	<%= f.label "Profile Name" %>
+    <%= f.text_field :profile_name , :required => true,placeholder: 'Profile Name'%><br>
+   
+    <%= f.input :email, :required => true,placeholder:'enter ur email' %>
+   
+    <%= f.input :password, :required => true,placeholder:'password'%>
+   
+    <%= f.input :password_confirmation, :required => true,placeholder:'confirm password' %>
+ 
     <%= f.button :submit, "Sign up" ,class:'btn btn-success'%>
-  </div>
+</fieldset>
+<p></p>
+<%= render "devise/shared/links" %>
 <% end %>
 
-<%= render "devise/shared/links" %>
+  </div>
+  
+</div>
