@@ -29,15 +29,16 @@ end
 class Survey < Survey_ques 							#For taking servey 
 	attr_accessor :survey_list
 	survey_no=0
-	def show_types_servey(user_name)
+	def show_types_survey(user_name)
 		@survey_list=CSV.read("total_servey.csv")
 		print "\n\tLIST OF SERVEY'S"
 		@survey_list.each { |survey| print "\n\t\t#{survey[0]}. #{survey[1]}"  }
 		print "\n\tPlease select ur Survey : "
 		survey_no=gets.chomp.to_i
+		take_survey(user_name) if survey_no < 1 or survey_no > @survey_list.length 
 		ques=Survey_ques.new
 		selected_survey=@survey_list[survey_no-1][0].to_s.split(" ")[1]
-		error=ques.show_survey_ques(selected_survey,user_name) if survey_no > 0
+		error=ques.show_survey_ques(selected_survey,user_name)
 		if error==1
 			print "\n\tU already took that survey......\n\tWant to reset ur details : "
 			choice=gets.chomp
@@ -56,7 +57,7 @@ class User
 	def start_servey()
 		print "\n\t\t\t\t\t\tSurvey for : #{@name}"
 		user_servey=Survey.new
-		user_servey.show_types_servey(@name)
+		user_servey.show_types_survey(@name)
 	end
 end
 
