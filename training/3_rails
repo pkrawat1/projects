@@ -1,0 +1,9 @@
+class Question
+	has_many:qanswers
+end
+
+class Qanswer
+	belongs_to:questions
+end
+
+q.question.buid #create new entry in question table with given question id
