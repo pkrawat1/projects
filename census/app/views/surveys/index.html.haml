@@ -1,0 +1,19 @@
+%h1 list of surveys
+%table
+  %thead.some{style: "color: red"}
+    %th
+      Name
+    %th
+      Year
+    %th
+      Actions
+  -@surveys.each do |survey|
+    %tr
+      %td
+        =survey.name
+      %td
+        =survey.year
+      %td
+        =link_to 'edit', edit_survey_path(survey) 
+        =link_to 'delete',survey,method: :delete,confirm: 'Are you sure?'
+%h3=link_to 'Create Survey',new_survey_path

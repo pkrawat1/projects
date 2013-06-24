@@ -1,0 +1,6 @@
+=form_for @survey do |f|
+  =f.label 'Name'
+  =f.text_field :name
+  =f.label 'Year'
+  =f.select(:year,options_for_select(Time.now.year..2015))
+  =f.submit 'save' 
