@@ -16,7 +16,7 @@ describe Survey do
   end
 	
 	it "must have a year" do
-    invalid_survey_year.should have(2).errors_on(:year)
+    invalid_survey_year.should have(1).errors_on(:year)
   end
   
   it "must have a valid year" do
