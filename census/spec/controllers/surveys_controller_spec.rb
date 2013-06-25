@@ -1,6 +1,7 @@
 require 'spec_helper'
 describe SurveysController do
 
+
   describe 'GET #new' do
     
     it 'assign empty survey object' do
@@ -21,6 +22,9 @@ describe SurveysController do
     it 'should create survey with valid parameters' do
       post :create,{survey: {name: 'survey 3',year: 2013}}
       expect(assigns(:survey).valid?).to eq(true)
+      s=Survey.first
+      p s
+      p s.questions
     end
    
     it 'redirect to index page if valid survey' do

@@ -1,5 +1,5 @@
 class Question < ActiveRecord::Base
-  attr_accessible :desc, :survey_id
+  attr_accessible :desc, :survey_id, :option_attributes
   belongs_to :survey
   has_many :options
   validates :desc, uniqueness: {scope: :survey_id},presence: :true, length: {minimum: 10}

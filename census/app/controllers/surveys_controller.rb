@@ -15,4 +15,5 @@ class SurveysController < ApplicationController
       render action: 'new'
     end
   end
+
 end
