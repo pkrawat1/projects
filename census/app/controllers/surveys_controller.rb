@@ -9,8 +9,12 @@ class SurveysController < ApplicationController
 
   def create
     @survey=Survey.new(params[:survey])
-    if @survey.save
-      redirect_to surveys_path
+    if @survey.questions.length > 2
+      if @survey.save!
+        redirect_to surveys_path
+      else
+        render action: 'new'
+      end
     else
       render action: 'new'
     end
