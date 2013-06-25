@@ -1,6 +1,12 @@
-=form_for @survey do |f|
+=nested_form_for @survey do |f|
   =f.label 'Name'
   =f.text_field :name
   =f.label 'Year'
   =f.select(:year,options_for_select(Time.now.year..2015))
+  =f.fields_for :questions do |q|
+    %br
+    =q.label 'Question'
+    =q.text_field :desc
+  =f.link_to_add "Add question", :questions
+  %br
   =f.submit 'save' 
