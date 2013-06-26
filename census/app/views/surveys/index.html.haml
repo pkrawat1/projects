@@ -1,19 +1,19 @@
-%h1 list of surveys
+%h1 List of Surveys
 %table
-  %thead.some{style: "color: red"}
-    %th
-      Name
-    %th
-      Year
-    %th
-      Actions
-  -@surveys.each do |survey|
+  %thead.some{style: "color: green"}
+    %th Year
+    %th Name
+    %th Action
+  - @surveys.each do |survey|
     %tr
+      %td 
+        = survey.year
+      %td 
+        = survey.name
       %td
-        =survey.name
+        = link_to 'edit',edit_survey_path(survey)
+        = link_to 'delete',survey_path(survey), method: :delete, confirm: 'Are you sure ?'
       %td
-        =survey.year
-      %td
-        =link_to 'edit', edit_survey_path(survey) 
-        =link_to 'delete',survey,method: :delete,confirm: 'Are you sure?'
-%h3=link_to 'Create Survey',new_survey_path
+        = link_to 'Take survey'
+%br        
+= link_to 'Create Survey',new_survey_path
