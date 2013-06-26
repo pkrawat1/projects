@@ -7,6 +7,10 @@
     %br
     =q.label 'Question'
     =q.text_field :desc
+    =f.fields_for :options do |op|
+      %br
+      =op.label 'Option'
+      =op.text_field :desc
   =f.link_to_add "Add question", :questions
   %br
   =f.submit 'save' 

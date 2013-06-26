@@ -9,8 +9,10 @@ class SurveysController < ApplicationController
 
   def create
     @survey=Survey.new(params[:survey])
-    if @survey.questions.length > 2
-      if @survey.save!
+    flag=true
+    print params
+    if @survey.questions.length > 2 and @survey.questions.each{|q| flag=false if q.options.length != 3}
+      if @survey.save! and flag
         redirect_to surveys_path
       else
         render action: 'new'
@@ -18,6 +20,24 @@ class SurveysController < ApplicationController
     else
       render action: 'new'
     end
+  end
+
+  def edit
+    @survey=Survey.find(params[:id])
+  end
+
+  def update
+    @survey=Survey.find(params[:id])
+    if @survey.update_attributes(params[:survey])
+      redirect_to surveys_path
+    else
+      render action: 'edit'
+    end
+  end
+  
+  def destroy
+    Survey.destroy(params[:id])
+    render action: 'index'
   end
 
 end

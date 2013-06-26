@@ -1,6 +1,7 @@
 class Survey < ActiveRecord::Base
   attr_accessible :name, :year, :questions_attributes
-  has_many :questions
+  has_many :questions, dependent: :destroy
+  has_many :options ,through: :questions
 	validates :name, presence: :true,uniqueness: :true
   validates :name, length: {minimum: 4, message: 'must be 4 characters long'}
   validates :year, numericality: :true
