@@ -5,12 +5,14 @@
   =f.select(:year,options_for_select(Time.now.year..2015))
   =f.fields_for :questions do |q|
     %br
-    =q.label 'Question'
-    =q.text_field :desc
-    =f.fields_for :options do |op|
-      %br
-      =op.label 'Option'
-      =op.text_field :desc
+    =q.label 'Q'
+    =q.text_field :desc,placeholder: 'Questions'
+    =f.link_to_remove 'Remove Question'
+    =q.fields_for :options do |op|
+      =op.label '*'
+      =op.text_field :desc,placeholder: 'Options'
+      =q.link_to_remove 'Remove option'
+    =q.link_to_add 'Add option', :options
   =f.link_to_add "Add question", :questions
   %br
   =f.submit 'save' 

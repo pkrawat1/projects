@@ -5,6 +5,12 @@ class SurveysController < ApplicationController
 
   def new
     @survey=Survey.new
+    3.times do
+      @survey.questions.build
+      4.times do
+        @survey.questions.last.options.build
+      end
+    end
   end
 
   def create
