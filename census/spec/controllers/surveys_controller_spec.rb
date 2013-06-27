@@ -1,6 +1,29 @@
 require 'spec_helper'
 describe SurveysController do
 
+  let(:survey){Survey.new(name: 'survey new',year: 2013,
+                             questions_attributes: {'0'=> {desc: 'question no 1',
+                                                           options_attributes:{'0'=>{desc: 'option 1'},
+                                                                               '1'=>{desc: 'option 2'},
+                                                                               '2'=>{desc: 'option 3'},
+                                                                               '3'=>{desc: 'option 4'}
+                                                          }                   },
+                                                    '1'=> {desc: 'question no 2',
+                                                           options_attributes:{'0'=>{desc: 'option 1'},
+                                                                               '1'=>{desc: 'option 2'},
+                                                                               '2'=>{desc: 'option 3'},
+                                                                               '3'=>{desc: 'option 4'}
+                                                          }                   },
+                                                    '2'=> {desc: 'question no 3',
+                                                           options_attributes:{'0'=>{desc: 'option 1'},
+                                                                               '1'=>{desc: 'option 2'},
+                                                                               '2'=>{desc: 'option 3'},
+                                                                               '3'=>{desc: 'option 4'}
+                                                          }                   }
+                                                   }
+                         )
+              }
+
   describe 'GET #index' do
     it 'must assign survey object' do
       surveys=Survey.all
@@ -28,65 +51,46 @@ describe SurveysController do
 
   describe 'POST #create' do
   
-
-    it 'should create survey with valid parameters' do
-      post :create,{survey: {name: 'survey 3',year: 2013}}
-      expect(assigns(:survey).valid?).to eq(true)
-    end
-
     it 'should create survey with minimum 3 question' do
       
       post :create,{survey: {name: 'survey new',year: 2013,
                              questions_attributes: {'0'=> {desc: 'question no 1',
                                                            options_attributes:{'0'=>{desc: 'option 1'},
                                                                                '1'=>{desc: 'option 2'},
-                                                                               '2'=>{desc: 'option 3'}
+                                                                               '2'=>{desc: 'option 3'},
+                                                                               '3'=>{desc: 'option 4'}
                                                           }                   },
                                                     '1'=> {desc: 'question no 2',
                                                            options_attributes:{'0'=>{desc: 'option 1'},
                                                                                '1'=>{desc: 'option 2'},
-                                                                               '2'=>{desc: 'option 3'}
+                                                                               '2'=>{desc: 'option 3'},
+                                                                               '3'=>{desc: 'option 4'}
                                                           }                   },
                                                     '2'=> {desc: 'question no 3',
                                                            options_attributes:{'0'=>{desc: 'option 1'},
                                                                                '1'=>{desc: 'option 2'},
-                                                                               '2'=>{desc: 'option 3'}
+                                                                               '2'=>{desc: 'option 3'},
+                                                                               '3'=>{desc: 'option 4'}
                                                           }                   }
                                                    }
                    }}
       expect(response).to redirect_to surveys_path
     end
-    
-    
-    it 'should not create survey with invalid parameters' do
-      post :create,{survey: {}}
-      expect(assigns(:survey).valid?).to eq(false)
-    end
-
-    it 'should not save the survey with invalid no of questions' do
-      post :create,{survey: {name: 'survey new',year: 2013,questions_attributes: {'0'=> {desc: 'question no 1'},
-                                                                                '1'=> {desc: 'question no 2'},
-                                                                                '2'=> {desc: 'question no 3'}
-                                                                               }
-                   }}
-      expect(response).to render_template :new
-    end
-
   end
 
   describe 'PUT #update' do
     it 'should update survey with valid parameters' do
-      Survey.create(name: 'new survey',year: 2013)
-      survey=Survey.last
+      survey.save
+      p Survey.last
       put :update, {id: survey.id, survey: {name: 'updated survey', year: 2013}}
       expect(response).to redirect_to surveys_path
+      p Survey.last
     end
   end
   
   describe 'DELETE #destroy' do
     it 'must delete the survey' do
-      Survey.create(name: 'new survey',year: 2013)
-      survey=Survey.last
+      survey.save
       delete :destroy,id: survey.id
       expect(response).to render_template :index
     end

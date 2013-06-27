@@ -1,0 +1,16 @@
+%h1.some{style: "color: green"} Show Survey
+%h2 
+  Survey Name : 
+  = @survey.name
+  %br 
+  Year : 
+  = @survey.year
+- @survey.questions.includes(:options).each do |ques|
+  %ul
+    %li
+      Q
+      = ques.desc
+      %ul
+        - ques.options.each do |op|
+          %li
+            = op.desc

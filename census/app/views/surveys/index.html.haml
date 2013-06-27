@@ -11,9 +11,10 @@
       %td 
         = survey.name
       %td
-        = link_to 'edit',edit_survey_path(survey)
-        = link_to 'delete',survey_path(survey), method: :delete, confirm: 'Are you sure ?'
-      %td
-        = link_to 'Take survey'
-%br        
-= link_to 'Create Survey',new_survey_path
+        -if current_user.name == 'pkrawat'
+          = link_to 'edit',edit_survey_path(survey)
+          = link_to 'delete',survey_path(survey), method: :delete, confirm: 'Are you sure ?'
+        = link_to 'show',survey
+        = link_to 'Take Survey',survey
+%br    
+= link_to 'Create Survey',new_survey_path if current_user.name == 'pkrawat'

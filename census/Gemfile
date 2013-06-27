@@ -8,6 +8,8 @@ gem 'rails', '3.2.13'
 gem 'sqlite3'
 gem 'devise'
 gem 'nested_form'
+gem 'factory_girl_rails', group: :test
+
 group :development, :test do
 	gem 'rspec-rails'
 	gem 'haml'

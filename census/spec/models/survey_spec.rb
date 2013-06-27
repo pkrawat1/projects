@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Survey do
-	#let(:survey) {Survey.new(name: 'Tree Census',year: '2013')}
+	let(:survey) {Survey.new(name: 'Tree Census',year: '2013')}
 	let(:invalid_length_name){Survey.new(name: 'abc')}	
 	let(:invalid_survey_year){Survey.new(name:'Tree Census')}	
 	let(:invalid_survey_name){Survey.new(year: '2013')}	
@@ -10,6 +10,10 @@ describe Survey do
 	it "must have a name" do
 		invalid_survey_name.should have(2).errors_on(:name)
 	end
+
+  it "must have 3 questions" do
+    survey.should have(1).errors_on(:questions)
+  end
 
 	it"name should be at least 4 characters long" do
     invalid_length_name.should have(1).errors_on(:name)

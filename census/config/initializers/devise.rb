@@ -23,7 +23,7 @@ Devise.setup do |config|
   # session. If you need permissions, you should implement that in a before filter.
   # You can also supply a hash where the value is a boolean determining whether
   # or not authentication should be aborted when the value is not present.
-  # config.authentication_keys = [ :email ]
+  config.authentication_keys = [ :name ]
 
   # Configure parameters from the request object used for authentication. Each entry
   # given should be a request method and it will automatically be passed to the
@@ -86,7 +86,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 10
 
   # Setup a pepper to generate the encrypted password.
-  # config.pepper = "b545b38ed13f6d1c46ac4d326aa820244fbb82f80d74f0e9eb8b3a058494e1efe1984071e952d30e039b095767a605810879e739ac140ada97c9f6af02c6d233"
+  # config.pepper = "fc66795775605b5c14050cf7aab83017e5c7ccce7c1bd52eb8a1e4f106ca380ca41ea944d7b787428e1d747b72882ece0af743347d08f0dcde24ca5d499d78b9"
 
   # ==> Configuration for :confirmable
   # A period that the user is allowed to access the website even without

@@ -11,7 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130623072137) do
+ActiveRecord::Schema.define(:version => 20130627134011) do
+
+  create_table "answers", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "option_id"
+    t.integer  "question_id"
+    t.integer  "survey_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "options", :force => true do |t|
     t.string   "desc"
@@ -34,6 +43,13 @@ ActiveRecord::Schema.define(:version => 20130623072137) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "surveys_users", :id => false, :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "survey_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
     t.string   "encrypted_password",     :default => "", :null => false
@@ -47,6 +63,7 @@ ActiveRecord::Schema.define(:version => 20130623072137) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.string   "name"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
