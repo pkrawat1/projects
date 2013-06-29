@@ -5,15 +5,20 @@
   %br 
   Year : 
   = @survey.year
-- @survey.questions.includes(:options).each do |ques|
+- @questions.each do |ques|
   %ul
     %li
       Q
       = ques.desc
       %ul
         - ques.options.each do |op|
-          %li
-            = op.desc 
-            %h4
-              - if current_user.answers.where(question_id: ques.id).nil?
-                selected
+          - if ques.answer.option_id == op.id
+            = current_user.id
+            = ques.answer.user_id
+            %li.some{style: "color: red"}
+              = op.desc
+              [selected]
+          - else
+            %li
+              = op.desc
+

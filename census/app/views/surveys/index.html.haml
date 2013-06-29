@@ -1,4 +1,4 @@
-%h1 List of Surveys
+%h1.page-header.some{style: "padding-top: 2%"} All Surveys
 %table
   %thead.some{style: "color: green"}
     %th Year
@@ -10,7 +10,7 @@
         = survey.year
       %td 
         = survey.name
-      %td
+      %td.meta
         -if current_user.name == 'pkrawat'
           = link_to 'Edit',edit_survey_path(survey)
           = link_to 'Delete',survey_path(survey), method: :delete, confirm: 'Are you sure ?'

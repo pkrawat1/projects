@@ -5,17 +5,28 @@
     = javascript_include_tag "application"
     = csrf_meta_tags
 %body
-  - if user_signed_in?
-    = link_to 'Home' , surveys_path
-    Logged in as 
-    = current_user.name
-    = link_to 'logout', destroy_user_session_path, method: :delete
-  - else
-    = link_to 'Sign In', new_user_session_path
-    = link_to 'Register', new_user_registration_path
-  %p#notice
-    = notice
-  %p#alert
-    = alert
+  %div.navbar.navbar-fixed-top.navbar-inverse
+    %div.navbar-inner
+      %div.container
+        %a.brand{:href => "home"} Census
+        %ul.nav
+          %li
+            = link_to "Home",surveys_path
+        %ul.nav.pull-right
+          - if user_signed_in?
+            %li
+              = link_to current_user.name,edit_user_registration_path
+            %li
+              = link_to "Sign Out",destroy_user_session_path,method: :delete
+          - else
+            %li
+              = link_to "Register",new_user_registration_path
+            %li
+              = link_to "Login",new_user_session_path
+  %div.some{style: "padding-top : 2%"}
+    %p.notice
+      = notice
+    %p.alert
+      = alert
 
   =yield
