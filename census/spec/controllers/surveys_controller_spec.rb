@@ -1,6 +1,12 @@
 require 'spec_helper'
 describe SurveysController do
 
+  before (:each) do
+    @user = FactoryGirl.create(:user)
+    sign_in @user
+  end
+  
+
   let(:survey){Survey.new(name: 'survey new',year: 2013,
                              questions_attributes: {'0'=> {desc: 'question no 1',
                                                            options_attributes:{'0'=>{desc: 'option 1'},
@@ -35,18 +41,27 @@ describe SurveysController do
   end
 
   describe 'GET #new' do
-    
-    it 'must assign empty survey object' do
+    it 'must assign empty survey object for admin' do
       get :new
       expect(assigns(:survey).new_record?).to eq(true)
     end
-    
-    it 'must render the new page' do
+
+    it 'must render the new page for admin' do
       get :new
       expect(response).to render_template :new
       expect(response.status).to eq(200)
     end
-
+=begin
+    it 'should not assign empty survey object for normal user' do
+      get :new
+      expect(assigns(:survey).new_record?).to eq(false)
+      expect(response).to redirect_to surveys_path
+    end
+    
+    it 'should not render the new page for normal user' do
+      get :new
+      expect(response).to redirect_to :index
+=end
   end
 
   describe 'POST #create' do
@@ -80,11 +95,8 @@ describe SurveysController do
 
   describe 'PUT #update' do
     it 'should update survey with valid parameters' do
-      survey.save
-      p Survey.last
       put :update, {id: survey.id, survey: {name: 'updated survey', year: 2013}}
       expect(response).to redirect_to surveys_path
-      p Survey.last
     end
   end
   

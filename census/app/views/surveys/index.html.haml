@@ -12,9 +12,9 @@
         = survey.name
       %td
         -if current_user.name == 'pkrawat'
-          = link_to 'edit',edit_survey_path(survey)
-          = link_to 'delete',survey_path(survey), method: :delete, confirm: 'Are you sure ?'
-        = link_to 'show',survey
-        = link_to 'Take Survey',survey
+          = link_to 'Edit',edit_survey_path(survey)
+          = link_to 'Delete',survey_path(survey), method: :delete, confirm: 'Are you sure ?'
+        = link_to 'Show' ,survey
+        = link_to 'Take Survey',home_path(survey) if User.find(current_user.id).answers.where(survey_id: survey.id).first.nil?
 %br    
 = link_to 'Create Survey',new_survey_path if current_user.name == 'pkrawat'

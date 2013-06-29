@@ -13,4 +13,7 @@
       %ul
         - ques.options.each do |op|
           %li
-            = op.desc
+            = op.desc 
+            %h4
+              - if current_user.answers.where(question_id: ques.id).nil?
+                selected
