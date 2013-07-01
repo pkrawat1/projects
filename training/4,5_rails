@@ -1,0 +1,1 @@
+scope:by_option,lambda{|option_name| joins(questions: :options).where(options: {desc: :option_name})}

@@ -1,0 +1,24 @@
+%h1.some{style: "color: green"} Show Survey
+%h2 
+  Survey Name : 
+  = @survey.name
+  %br 
+  Year : 
+  = @survey.year
+- @questions.each do |ques|
+  %ul
+    %li
+      Q
+      = ques.desc
+      %ul
+        - ques.options.each do |op|
+          - if ques.answer.option_id == op.id
+            = current_user.id
+            = ques.answer.user_id
+            %li.some{style: "color: red"}
+              = op.desc
+              [selected]
+          - else
+            %li
+              = op.desc
+
