@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="span4">
+<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name),html: {class: "well"}) do |f| %>
+  <%= f.error_notification %>
+
+  <fieldset>
+      <legend>Sign Up</legend>
+    <%= f.label "First Name" %>
+  	<%= f.text_field :first_name ,:required => true,placeholder: 'First Name'%>
+    
+    <%= f.label "Last Name" %>
+  	<%= f.text_field :last_name,:required => true,placeholder: 'Last Name' %>
+    
+  	<%= f.label "Profile Name" %>
+    <%= f.text_field :profile_name , :required => true,placeholder: 'Profile Name'%><br>
+   
+    <%= f.input :email, :required => true,placeholder:'enter ur email' %>
+   
+    <%= f.input :password, :required => true,placeholder:'password'%>
+   
+    <%= f.input :password_confirmation, :required => true,placeholder:'confirm password' %>
+ 
+    <%= f.button :submit, "Sign up" ,class:'btn btn-success'%>
+</fieldset>
+<p></p>
+<%= render "devise/shared/links" %>
+<% end %>
+
+  </div>
+  
+</div>
