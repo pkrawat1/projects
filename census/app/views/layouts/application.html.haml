@@ -8,7 +8,7 @@
   %div.navbar.navbar-fixed-top.navbar-inverse
     %div.navbar-inner
       %div.container
-        %a.brand{:href => "home"} Census
+        %a.brand{:href => "/home"} Census
         %ul.nav
           %li
             = link_to "Home",surveys_path
@@ -23,10 +23,9 @@
               = link_to "Register",new_user_registration_path
             %li
               = link_to "Login",new_user_session_path
-  %div.some{style: "padding-top : 2%"}
-    %p.notice
-      = notice
+  %div.some{style: "padding-top : 2%", align: "center"}
     %p.alert
       = alert
-
-  =yield
+    %p.notice 
+      = notice
+%div.container=yield
