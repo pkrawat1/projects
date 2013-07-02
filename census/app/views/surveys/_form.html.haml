@@ -1,23 +1,28 @@
-= nested_form_for @survey do |f|
-  %h1.some{style:"color: red"}
-    = @survey.errors.full_messages
-  %br
-  = f.label 'Name'
-  = f.text_field :name
-  = f.label 'Year'
-  = f.select(:year,options_for_select(Time.now.year..2015))
-  %ol
-    = f.fields_for :questions do |q|
-      %br
-      %li
-        = q.text_field :desc, placeholder: 'Question'
-        = q.link_to_remove 'Remove question'
-        %ol
-          = q.fields_for :options do |op|
-            %li  
-              = op.text_field :desc, placeholder: 'Option'
-              = op.link_to_remove 'Remove option'
-        =q.link_to_add 'Add option', :options
-  =f.link_to_add 'Add Question', :questions
-  =f.submit 'Save'
-    
+%div.well
+  = nested_form_for @survey do |f|
+    - if @survey.errors.any?
+      %ul.alert
+        %h4
+          = @survey.errors.size
+          Errors Occured
+        = @survey.errors.full_messages.each do |error|
+          %li= error
+    %br
+    = f.label 'Name'
+    = f.text_field :name
+    = f.label 'Year'
+    = f.select(:year,options_for_select(Time.now.year..2015))
+    %ol
+      = f.fields_for :questions do |q|
+        %br
+        %li
+          = q.text_field :desc, placeholder: 'Question'
+          = q.link_to_remove 'Remove question'
+          %ol
+            = q.fields_for :options do |op|
+              %li  
+                = op.text_field :desc, placeholder: 'Option'
+                = op.link_to_remove 'Remove option'
+          =q.link_to_add 'Add option', :options
+    =f.link_to_add 'Add Question', :questions
+    %br= f.submit 'Save',class: "btn btn-info"

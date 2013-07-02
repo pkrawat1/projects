@@ -5,6 +5,7 @@ class HomeController < ApplicationController
   end
 
   def show
+    redirect_to surveys_path if User.find(current_user.id).answers.where(survey_id: params[:id]).first.nil? == false
     @survey = Survey.find(params[:id])
     @user = User.find(current_user.id)
  		@questions = @survey.questions.includes(:options).each
