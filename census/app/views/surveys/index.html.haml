@@ -10,11 +10,11 @@
         = survey.name
       %td 
         = survey.year
-      %td.meta
+      %td
         -if current_user.name == 'pkrawat'
           = link_to 'Edit',edit_survey_path(survey)
           = link_to 'Delete',survey_path(survey), method: :delete, confirm: 'Are you sure ?'
         = link_to 'Show' ,survey
-        = link_to 'Take Survey',home_path(survey),class: "btn" if User.find(current_user.id).answers.where(survey_id: survey.id).first.nil?
+      %td= link_to 'Take Survey',home_path(survey),class: "btn" if User.find(current_user.id).answers.where(survey_id: survey.id).first.nil?
 %br    
-= link_to 'Create Survey',new_survey_path,class: "btn btn-success" if current_user.name == 'pkrawat'
+= link_to 'Create Survey',new_survey_path,class: "btn btn-warning" if current_user.name == 'pkrawat'

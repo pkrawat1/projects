@@ -5,4 +5,18 @@
   %br 
   Year : 
   = @survey.year
-  = @questions.each {|q| q.desc}
+-@questions.each do |ques|
+  %ul
+    %li
+      = ques.desc
+      %ul
+        -ques.options.each do |op|
+          - if ques.answer[0].nil? == true
+            %li=op.desc
+          - else
+            - if current_user.id == ques.answer[0].user_id and ques.answer[0].option_id == op.id
+              %li.some{style:"color: red"}=op.desc
+            - else
+              %li=op.desc
+
+

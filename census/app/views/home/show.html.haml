@@ -1,19 +1,19 @@
 %h1.some{style: "color: green"} Take Survey
 %h2 
-	Survey : 
-	= @survey.name
-	%br
-	Year:
-	=@survey.year
+  Survey : 
+  = @survey.name
+  %br
+  Year:
+  =@survey.year
 = nested_form_for @user, url: home_path(@user)  do |f|
-	- @questions.each do |ques|
-		%ul
-		%li
-			Q.
-			= ques.desc
-			%ul
-			- ques.options.each do |op|
-				%li
-					= radio_button('select',ques.desc,op.id)
-					= op.desc
-	= f.submit 'Submit'
+  - @questions.each do |ques|
+    %ul
+      %li
+        Q.
+        = ques.desc
+        %ul
+          - ques.options.each do |op|
+            %li
+              = radio_button('select',ques.desc,op.id)
+              =op.desc
+  = f.submit 'Submit',class: "btn btn-warning"
